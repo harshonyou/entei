@@ -1,6 +1,10 @@
 package evaluator
 
-import "entei/object"
+import (
+	"fmt"
+
+	"entei/object"
+)
 
 var builtins = map[string]*object.BuiltIn{
 	"len": {
@@ -89,6 +93,15 @@ var builtins = map[string]*object.BuiltIn{
 			arr.Elements = append(arr.Elements, args[1])
 
 			return arr
+		},
+	},
+	"puts": {
+		Fn: func(args ...object.Object) object.Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+
+			return NULL
 		},
 	},
 }
